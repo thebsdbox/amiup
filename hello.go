@@ -32,6 +32,8 @@ func main() {
 	log.Infoln("AM I UP?")
 
 	server := flag.String("server", "", "Server address that is listening for an UP message")
+	servicename := flag.String("service", "", "The Service that will be periodically checked as UP")
+
 	port := flag.Int("port", 8080, "Server port that will be used")
 	listener := flag.Bool("listen", false, "Listen for UP messages")
 
@@ -42,11 +44,11 @@ func main() {
 		if *server == "" {
 			log.Fatalln("No Server was specified, unable to send UP messages")
 		}
-		if servicename == "" {
+		if *servicename == "" {
 			log.Infoln("No Service name specified, so sending a single UP message")
 			oneShot(fmt.Sprintf("%s/up", url))
 		} else {
-			url := fmt.Sprintf("%s:%d", servicename, *port)
+			url := fmt.Sprintf("%s:%d", *servicename, *port)
 			log.Infof("Attempting to connect to %s ", url)
 
 			// spin out the listener to a go routine, so that the service has an
