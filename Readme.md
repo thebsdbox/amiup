@@ -5,6 +5,14 @@
 
 `amiup` works in three modes:
 
+## Building
+
+A linux amiup container can be built using the makefile.
+
+```
+make docker 
+```
+
 ### Listener
 
 When started as a listener then amiup exposes a http endpoint that other amiup containers can connect back to, and report their state.
